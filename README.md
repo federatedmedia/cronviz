@@ -36,7 +36,7 @@ Cronviz will turn...
 
 into...
 
-![]https://github.com/federatedmedia/cronviz/raw/master/assets/screenshot.png 
+![](https://github.com/federatedmedia/cronviz/raw/master/assets/screenshot.png)
 
 
 ## RUNNING
