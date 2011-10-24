@@ -16,7 +16,7 @@ module Cronviz
     end
 
     # Find out how many minutes there are between the two times user specified
-    # so that Cronjob can roll up every-X-minute jobs even for unusual periods.
+    # so that CronJob can roll up every-X-minute jobs even for unusual periods.
     def prepare_event_data event_data
       # Subtracting a minute from @earliest_time via - 60 because
       # we're not trying to determine a difference between two times,
@@ -66,7 +66,6 @@ module Cronviz
         elements[k] = CronParser.expand(k, v)
       end
 
-      #p "Generating times for cronjob: #{mi} #{ho} #{da} #{mo} #{dw} #{co[0..1].join(' ')}..."
       CronJob.new(:command => co, :times => fan_out(elements), :event_data => @event_data)
     end
 

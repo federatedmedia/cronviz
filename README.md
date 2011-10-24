@@ -60,14 +60,16 @@ Events that occur every minute and every five minutes will swamp the display, so
 
 With a bit of cron-style math, you can define custom rollups targeting whatever interval you like. 
 
-Let's say you've got an event that occurs every 21 minutes and you'd like to roll it up. Cron defines "*/21" as occurrences on the following minutes of each hour: :0, :21, :42. This results in three executions per hour, for as many hours are between your earliest_time and latest_time. However, if your earliest_time starts at :01 instead of :00, that hour's first execution on :00 won't happen. Thus, given the following...
+Let's say you've got an event that occurs every 21 minutes and you'd like to roll it up. Cron defines "*/21" as occurrences on the following minutes of each hour: :0, :21, :42. This results in three executions per hour, for as many hours are between your earliest_time and latest_time. So 72 occurrences.
+
+Crontab math caveat: if your earliest_time starts at, say, :01 instead of :00, that hour's first execution on :00 won't happen. Thus, given the following...
 
 ````
 earliest_time = "2011-12-08 00:01"
 latest_time   = "2011-12-09 00:00"
 ````
 
-then a job defined as "*/21 * * * *" will occur 71 times. You'd define a new hash in EVENT_DATA with your desired rollup interval as an integer, as follows...
+then a job defined as ````"*/21 * * * *"```` will occur 71 times. You'd define a new hash in ````EVENT_DATA```` with your desired rollup interval as an integer, as follows...
 
 ````
 71 => {
@@ -84,4 +86,4 @@ durationEvent must equal true. title_prefix can be defined as any string. Color 
 
 - Timezone is currently hardcoded and, all things remaining static, is effectively transparent as long as the server's timezone is yours. It would be nice to allow an offset parameter so that someone in Pacific could view an Eastern server's crontab translated to their local time.
 
-- Excessively lengthy cron commands ("/usr/bin/bash /full/path/to/script.sh >> /some/output/path.log 2>> /some/error/path.log") can uglify the resulting graph display. It might be possible to find a simple way to allow specifying which bits of the cron command are used as the resulting title... comments in the crontab file?
+- Excessively lengthy cron commands -- ````"/usr/bin/bash /full/path/to/script.sh >> /some/output/path.log 2>> /some/error/path.log"```` -- can uglify the resulting graph display. It might be possible to find a simple way to allow specifying which bits of the cron command are used as the resulting title... possibly via comments in the crontab file?
