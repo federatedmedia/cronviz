@@ -1,0 +1,63 @@
+!!! Strict
+%html
+  %head
+    %meta{:content => "text/html;charset=UTF-8", "http-equiv" => "Content-Type"}/
+    :css
+      #my_timeline {
+      border: 1px solid #aaa; 
+      height: 400px; 
+      font-size: 8pt;
+      }
+    %script{:src => "http://static.simile.mit.edu/timeline/api-2.3.0/timeline-api.js?bundle=true", :type => "text/javascript"}
+    :javascript
+      var tl;
+      function onLoad() {
+          var eventSource = new Timeline.DefaultEventSource();
+          var zones = [
+              {   start:    "#{Time.parse(earliest_time)}",
+                  end:      "#{Time.parse(latest_time)}",
+                  magnify:  10,
+                  unit:     Timeline.DateTime.MINUTE,
+                  multiple: 10
+              }
+          ];
+          var bandInfos = [
+              Timeline.createBandInfo({
+                  eventSource:    eventSource,
+                  timeZone:       -4,
+                  date:           "#{Time.parse(earliest_time)}",
+                  width:          "80%",  
+                  intervalUnit:   Timeline.DateTime.HOUR,
+                  intervalPixels: 600
+              }),
+              Timeline.createBandInfo({
+                  eventSource:    eventSource,
+                  timeZone:       -4,
+                  date:           "#{Time.parse(earliest_time)}",
+                  width:          "20%", 
+                  intervalUnit:   Timeline.DateTime.DAY, 
+                  intervalPixels: 600,
+                  layout:         'overview'
+              })
+          ];
+
+          bandInfos[1].syncWith = 0;
+          bandInfos[1].highlight = true;
+
+          tl = Timeline.create(document.getElementById("my_timeline"), bandInfos);
+          eventSource.loadJSON(#{cron_json}, ".");
+      }
+
+      var resizeTimerID = null;
+      function onResize() {
+          if (resizeTimerID == null) {
+              resizeTimerID = window.setTimeout(function() {
+                  resizeTimerID = null;
+                  tl.layout();
+              }, 500);
+          }
+      }
+    %body{:onload => "onLoad();", :onresize => "onResize();"}
+      #my_timeline
+      %noscript
+        This page uses Javascript to show you a Timeline. Please enable Javascript in your browser to see the full page. Thank you.
