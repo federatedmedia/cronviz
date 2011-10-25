@@ -1,5 +1,8 @@
 require 'time'
 
+DEFAULT_FILE = "crontab"
+
+
 module Cronviz
   class Crontab
     attr_reader :jobs
@@ -7,7 +10,7 @@ module Cronviz
     def initialize options={}
       @earliest_time = options[:earliest_time]
       @latest_time   = options[:latest_time]
-      @input         = options[:input] || "crontab"
+      @input         = options[:input] || DEFAULT_FILE
 
       prepare_event_data options[:event_data]
 
@@ -51,7 +54,16 @@ module Cronviz
     end
     
     def get_lines
-      begin; open(@input); rescue Errno::ENOENT; @input end.each_line do |x|
+      # Allow a filepath or a string of cron jobs to be passed in.
+      # If nothing passed in, default to filename DEFAULT_FILE in the
+      # working directory.
+      # If that doesn't exist, raise and exit.
+      begin
+        open @input
+      rescue Errno::ENOENT
+        raise "Defaulted to ./crontab but no such file found!" if @input == DEFAULT_FILE
+        @input
+      end.each_line do |x|
         yield x.chop if x.strip.match /^[\*0-9]/
       end
     end

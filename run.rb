@@ -40,6 +40,7 @@ def main
   open("output.html", "w") do |f|
     f.write html
   end
+  print "./output.html successfully created!"
 
 end
 

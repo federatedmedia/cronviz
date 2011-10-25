@@ -49,7 +49,7 @@ gem install haml json
 
 Requires a crontab file named "crontab" in the current directory. You can also use a filepath, as outlined below.
 
-Look to run.rb for an example that renders a HAML template that passes cronviz' JSON output to the SIMILE timeline widget to produce a graph as seen in the screenshot above.
+Look to run.rb for an example that renders a HAML template to ./output.html, by passing cronviz' JSON output to the SIMILE timeline widget to produce a graph as seen in the screenshot above.
 
 You'll need to pass the filepath to a crontab file, or accept the default of "crontab" in the current directory.
 
