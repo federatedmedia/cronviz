@@ -1,12 +1,16 @@
-cronviz -- visualize your cron jobs
-=================================
+# cronviz: Visualize your cron jobs.
 
+It's 3 AM. Do you know where your cron jobs are?
 
-## DESCRIPTION
+## Use case
 
-Something's causing performance issues on the application server between 1 and 4 AM, and the cron jobs seem the likeliest culprit.
+Something's causing performance issues on the application server between 1 and 4 AM, and the cron jobs seem a likely culprit. 
 
-Problem is, crontabs were written for computers to interpret -- not humans.
+Naturally, you eyeball your crontab to find out what's running during those hours.
+
+Now you have two problems.
+
+Thing is, crontabs were written for computers to interpret -- not humans. Over time, they accrete into an impenetrable, opaque mass of text. Trying to get a comprehensive sense of all the various run times, and finding patterns therein, can be exceedingly difficult.
 
 Cronviz will turn...
 
@@ -90,8 +94,15 @@ then a job defined as ````"*/21 * * * *"```` will occur 71 times. You'd define a
 durationEvent must equal true. title_prefix can be defined as any string. Color and class are optional.
 
 
-## NEXT STEPS
+## Shortcomings
+
+- Unfortunately there's no simple way to know what time a job *finishes* short of altering the crontab command or the job it fires. Minus that, cronviz can only tell you what time a job has *started*.
+
+- Date generation should be faster. 
+
+
+## Next steps
 
 - Timezone is currently hardcoded and, all things remaining static, is effectively transparent as long as the server's timezone is yours. It would be nice to allow an offset parameter so that someone in Pacific could view an Eastern server's crontab translated to their local time.
 
-- Excessively lengthy cron commands -- ````"/usr/bin/bash /full/path/to/script.sh >> /some/output/path.log 2>> /some/error/path.log"```` -- can uglify the resulting graph display. It might be possible to find a simple way to allow specifying which bits of the cron command are used as the resulting title... possibly via comments in the crontab file?
+- Exceedingly lengthy cron commands such as ````"/usr/bin/bash /full/path/to/script.sh >> /some/output/path.log 2>> /some/error/path.log"```` can uglify the resulting graph display. It might be possible to find a simple way to allow specifying which bits of the cron command are used as the resulting title... possibly via comments in the crontab file?
