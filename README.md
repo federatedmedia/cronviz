@@ -96,7 +96,7 @@ durationEvent must equal true. title_prefix can be defined as any string. Color 
 
 ## Shortcomings
 
-- Unfortunately there's no simple way to know what time a job *finishes* short of altering the crontab command or the job it fires. Minus that, cronviz can only tell you what time a job has *started*.
+- Unfortunately there's no simple way to know what time a job *finishes* short of 1) altering the crontab command or the job it fires, and 2) getting that information into cronviz. Minus that, cronviz can only tell you what time a job has *started*.
 
 - Date generation should be faster. 
 
