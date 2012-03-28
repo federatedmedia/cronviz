@@ -4,15 +4,15 @@ It's 3 AM. Do you know where your cron jobs are?
 
 ## Use case
 
-Something's causing performance issues on the application server between 1 and 4 AM, and the cron jobs seem a likely culprit. 
+You have a problem: something's causing performance issues on the application server between 1 and 4 AM, and the cron jobs seem a likely culprit.
 
 Naturally, you eyeball your crontab to find out what's running during those hours.
 
 Now you have two problems.
 
-Thing is, crontabs were written for computers to interpret -- not humans. Over time, they accrete into an impenetrable, opaque mass of text. Trying to get a comprehensive sense of all the various run times, and finding patterns therein, can be exceedingly difficult.
+Over time, cron jobs accrete into an impenetrable, opaque mass of text. Trying to get a comprehensive sense of all the various run times, and finding patterns therein, can be exceedingly difficult. Crontabs are written for computers to interpret -- not humans.
 
-Cronviz will turn...
+Cronviz can help, by turning this...
 
 ````
 * * * * * /usr/bin/foo
