@@ -2,6 +2,8 @@
 
 It's 3 AM. Do you know where your cron jobs are?
 
+![](https://github.com/federatedmedia/cronviz/raw/master/assets/screenshot.png)
+
 ## Use case
 
 You have a problem: something's causing performance issues on the application server between 1 and 4 AM, and the cron jobs seem a likely culprit.
@@ -12,7 +14,11 @@ Now you have two problems.
 
 Over time, cron jobs accrete into an impenetrable, opaque mass of text. Trying to get a comprehensive sense of all the various run times, and finding patterns therein, can be exceedingly difficult. Crontabs are written for computers to interpret -- not humans.
 
-Cronviz can help, by turning this...
+Cronviz can help, by producing this...
+
+![](https://github.com/federatedmedia/cronviz/raw/master/assets/screenshot.png)
+
+out of this...
 
 ````
 * * * * * /usr/bin/foo
@@ -37,10 +43,6 @@ Cronviz can help, by turning this...
 45 1 * * * /usr/bin/whomever
 * * * * * /usr/bin/whenever
 ````
-
-into...
-
-![](https://github.com/federatedmedia/cronviz/raw/master/assets/screenshot.png)
 
 
 ## RUNNING
