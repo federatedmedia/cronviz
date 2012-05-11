@@ -2,9 +2,9 @@ require 'rubygems'
 require 'json'
 require 'haml'
 
-require 'lib/crontab'
-require 'lib/cron_job'
-require 'lib/cron_parser'
+require './lib/crontab'
+require './lib/cron_job'
+require './lib/cron_parser'
 
 
 EVENT_DATA = {
